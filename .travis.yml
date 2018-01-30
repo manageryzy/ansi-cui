@@ -8,10 +8,19 @@ env:
 
 
 matrix:
-  before_script:
-    - sudo apt-get update -qq
-    - sudo apt-get install cmake -y
-  script:
-    - make
-    - build/main
-    - make clean
+  include:
+    - os: linux
+      dist: trusty
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            cmake
+
+before_script:
+  - sudo apt-get update -qq
+  - sudo apt-get install cmake -y
+script:
+  - make
+  - build/main
+  - make clean
