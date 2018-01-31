@@ -47,8 +47,8 @@ matrix:
 script:
   - mkdir build
   - cd build
-  - export CC=gcc-$(CC_VER)
-  - export CXX=g++-$(CC_VER)
+  - export CC=gcc-$CC_VER
+  - export CXX=g++-$CC_VER
   - cmake ..
   - make
   - main < echo "hello\n"
