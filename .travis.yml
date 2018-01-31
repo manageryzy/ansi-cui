@@ -1,3 +1,5 @@
+language: cpp
+
 env:
   global:
     # Ubuntu version
@@ -16,7 +18,7 @@ matrix:
             - cmake
             - g++-5
       env:
-         - MATRIX_EVAL="export CC=gcc-5 && export CXX=g++-5"
+         - MATRIX_EVAL="export CC_VER=5"
 
     # works on Precise and Trusty
     - os: linux
@@ -28,7 +30,7 @@ matrix:
             - cmake
             - g++-6
       env:
-        - MATRIX_EVAL="export CC=gcc-6 && export CXX=g++-6"
+        - MATRIX_EVAL="export CC_VER=6"
 
     # works on Precise and Trusty
     - os: linux
@@ -40,11 +42,13 @@ matrix:
             - cmake
             - g++-7
       env:
-        - MATRIX_EVAL="export CC=gcc-7 && export CXX=g++-7"
+        - MATRIX_EVAL="export CC_VER=7"
 
 script:
   - mkdir build
   - cd build
+  - export CC = gcc-$(CC_VER)
+  - export CXX = g++-$(CC_VER)
   - cmake ..
   - make
   - main < echo "hello\n"
