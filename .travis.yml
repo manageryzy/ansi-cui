@@ -19,7 +19,6 @@ matrix:
             - g++-5
       env:
          - CC_VER=5
-         - CMAKE_CXX_FLAGS='-std=c++11'
 
     # works on Precise and Trusty
     - os: linux
@@ -53,5 +52,3 @@ script:
   - $CXX --version
   - cmake ..
   - make
-  - demo1_c < echo '\n'
-  - demo1_cpp < echo '\n'
