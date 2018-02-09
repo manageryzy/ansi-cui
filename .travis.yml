@@ -18,7 +18,7 @@ matrix:
             - cmake
             - g++-5
       env:
-         - MATRIX_EVAL="export CC_VER=5"
+         - CC_VER=5
 
     # works on Precise and Trusty
     - os: linux
@@ -30,7 +30,7 @@ matrix:
             - cmake
             - g++-6
       env:
-        - MATRIX_EVAL="export CC_VER=6"
+        - CC_VER=6
 
     # works on Precise and Trusty
     - os: linux
@@ -42,7 +42,7 @@ matrix:
             - cmake
             - g++-7
       env:
-        - MATRIX_EVAL="export CC_VER=7"
+        - CC_VER=7
 
 script:
   - mkdir build
