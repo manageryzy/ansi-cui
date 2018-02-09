@@ -5,6 +5,10 @@
 #include "ansi_cui.hpp"
 #include "ansi_cui.h"
 
+#if __cplusplus <= 199711L
+    #error This demo needs at least a C++11 compliant compiler
+#endif
+
 #ifdef _MSC_VER
 // Enable VT Mode on Windows 10
 bool EnableVTMode()
@@ -49,8 +53,7 @@ int main(int argc, char* argv[])
     // here is c demo
     cursor_move_to(10, 40);
     screen_set_graphic({ansi_cui::screen::background_blue});
-    printf("Any key to continue");
-
+    printf("This is cpp11+ demo \nAny key to continue");
 
     std::cin.get();
     return 0;

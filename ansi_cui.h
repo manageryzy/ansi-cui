@@ -6,6 +6,12 @@
 #define ESC "\x1b"
 #define CSI "\x1b\x5b"
 
+#ifdef __cplusplus
+#define DEFAULT_FP = stdout
+#else
+#define DEFAULT_FP
+#endif
+
 /**
 * Moves the cursor to the specified position (coordinates).
 * If you do not specify a position, the cursor moves to the home
@@ -14,7 +20,7 @@
 * Cursor Position escape sequence.
 */
 
-static inline void cursor_move_to(unsigned int line, unsigned int column,FILE * fp = stdout)
+static inline void cursor_move_to(unsigned int line, unsigned int column,FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%u;%uH", line, column);
 }
@@ -25,7 +31,7 @@ static inline void cursor_move_to(unsigned int line, unsigned int column,FILE * 
 *	If the cursor is already on the top line, ANSI.SYS ignores this
 *	sequence.
 */
-static inline void cursor_move_up(unsigned int length, FILE * fp = stdout)
+static inline void cursor_move_up(unsigned int length, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%uA", length);
 }
@@ -35,7 +41,7 @@ static inline void cursor_move_up(unsigned int length, FILE * fp = stdout)
 * changing columns. If the cursor is already on the bottom line,
 * ANSI.SYS ignores this sequence.
 */
-static inline void cursor_move_down(unsigned int length, FILE * fp = stdout)
+static inline void cursor_move_down(unsigned int length, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%uB", length);
 }
@@ -45,7 +51,7 @@ static inline void cursor_move_down(unsigned int length, FILE * fp = stdout)
 * without changing lines. If the cursor is already in the
 * rightmost column, ANSI.SYS ignores this sequence.
 */
-static inline void cursor_move_forward(unsigned int length, FILE * fp = stdout)
+static inline void cursor_move_forward(unsigned int length, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%uC", length);
 }
@@ -55,7 +61,7 @@ static inline void cursor_move_forward(unsigned int length, FILE * fp = stdout)
 * changing lines. If the cursor is already in the leftmost column,
 * ANSI.SYS ignores this sequence.
 */
-static inline void cursor_move_backward(unsigned int length, FILE * fp = stdout)
+static inline void cursor_move_backward(unsigned int length, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%uC", length);
 }
@@ -65,7 +71,7 @@ static inline void cursor_move_backward(unsigned int length, FILE * fp = stdout)
 * the saved cursor position by using the Restore Cursor Position
 * sequence.
 */
-static inline void cursor_save_pos(FILE * fp = stdout)
+static inline void cursor_save_pos(FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"s");
 }
@@ -74,7 +80,7 @@ static inline void cursor_save_pos(FILE * fp = stdout)
 * Returns the cursor to the position stored by the Save Cursor
 * Position sequence.
 */
-static inline void cursor_restore_pos(FILE * fp = stdout)
+static inline void cursor_restore_pos(FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"u");
 }
@@ -83,7 +89,7 @@ static inline void cursor_restore_pos(FILE * fp = stdout)
 * Clears the screen and moves the cursor to the home position
 * (line 0, column 0).
 */
-static inline void screen_clear(FILE * fp = stdout)
+static inline void screen_clear(FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"2J");
 }
@@ -92,7 +98,7 @@ static inline void screen_clear(FILE * fp = stdout)
 *  Clears all characters from the cursor position to the end of
 *  the line (including the character at the cursor position).
 */
-static inline void screen_earse_line(FILE * fp = stdout)
+static inline void screen_earse_line(FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"K");
 }
@@ -103,7 +109,7 @@ static inline void screen_earse_line(FILE * fp = stdout)
 * of this escape sequence. Graphics mode changes the colors and
 * attributes of text (such as bold and underline) displayed on
 * the screen.
-* 
+*
 * Text attributes
 * 0	All attributes off
 * 1	Bold on
@@ -111,7 +117,7 @@ static inline void screen_earse_line(FILE * fp = stdout)
 * 5	Blink on
 * 7	Reverse video on
 * 8	Concealed on
-* 
+*
 * Foreground colors
 * 30	Black
 * 31	Red
@@ -121,7 +127,7 @@ static inline void screen_earse_line(FILE * fp = stdout)
 * 35	Magenta
 * 36	Cyan
 * 37	White
-* 
+*
 * Background colors
 * 40	Black
 * 41	Red
@@ -132,7 +138,7 @@ static inline void screen_earse_line(FILE * fp = stdout)
 * 46	Cyan
 * 47	White
 */
-static inline void screen_set_graphic(unsigned int setting, FILE * fp = stdout)
+static inline void screen_set_graphic(unsigned int setting, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"%um",setting);
 }
@@ -157,7 +163,7 @@ static inline void screen_set_graphic(unsigned int setting, FILE * fp = stdout)
 *  18	640 x 480 color (16-color graphics)
 *  19	320 x 200 color (256-color graphics)
 **/
-static inline void screen_set_mode(unsigned int setting, FILE * fp = stdout)
+static inline void screen_set_mode(unsigned int setting, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"=%uh", setting);
 }
@@ -181,11 +187,12 @@ static inline void screen_set_mode(unsigned int setting, FILE * fp = stdout)
 *  18	640 x 480 color (16-color graphics)
 *  19	320 x 200 color (256-color graphics)
 **/
-static inline void screen_reset_mode(unsigned int setting, FILE * fp = stdout)
+static inline void screen_reset_mode(unsigned int setting, FILE * fp DEFAULT_FP)
 {
     fprintf(fp, CSI"=%ul", setting);
 }
 
 #undef ESC
 #undef CSI
+#undef DEFAULT_FP
 #endif

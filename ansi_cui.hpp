@@ -11,7 +11,7 @@ namespace ansi_cui
     {
         /**
          * Moves the cursor to the specified position (coordinates).
-         * If you do not specify a position, the cursor moves to the home 
+         * If you do not specify a position, the cursor moves to the home
          * position at the upper-left corner of the screen (line 0, column 0).
          * This escape sequence works the same way as the following
          * Cursor Position escape sequence.
@@ -22,9 +22,9 @@ namespace ansi_cui
         }
 
         /**
-         *	Moves the cursor up by the specified number of lines without 
-         *	changing columns. 
-         *	If the cursor is already on the top line, ANSI.SYS ignores this 
+         *	Moves the cursor up by the specified number of lines without
+         *	changing columns.
+         *	If the cursor is already on the top line, ANSI.SYS ignores this
          *	sequence.
          */
         static void move_up(unsigned int length, std::ostream & stream = std::cout)
@@ -33,7 +33,7 @@ namespace ansi_cui
         }
 
         /**
-         * Moves the cursor down by the specified number of lines without 
+         * Moves the cursor down by the specified number of lines without
          * changing columns. If the cursor is already on the bottom line,
          * ANSI.SYS ignores this sequence.
          */
@@ -43,8 +43,8 @@ namespace ansi_cui
         }
 
         /**
-         * Moves the cursor forward by the specified number of columns 
-         * without changing lines. If the cursor is already in the 
+         * Moves the cursor forward by the specified number of columns
+         * without changing lines. If the cursor is already in the
          * rightmost column, ANSI.SYS ignores this sequence.
          */
         static void move_forward(unsigned int length, std::ostream & stream = std::cout)
@@ -54,7 +54,7 @@ namespace ansi_cui
 
         /**
          * Moves the cursor back by the specified number of columns without
-         * changing lines. If the cursor is already in the leftmost column, 
+         * changing lines. If the cursor is already in the leftmost column,
          * ANSI.SYS ignores this sequence.
          */
         static void move_backward(unsigned int length, std::ostream & stream = std::cout)
@@ -63,8 +63,8 @@ namespace ansi_cui
         }
 
         /**
-         * Saves the current cursor position. You can move the cursor to 
-         * the saved cursor position by using the Restore Cursor Position 
+         * Saves the current cursor position. You can move the cursor to
+         * the saved cursor position by using the Restore Cursor Position
          * sequence.
          */
         static void save_pos(std::ostream & stream = std::cout)
@@ -73,7 +73,7 @@ namespace ansi_cui
         }
 
         /**
-         * Returns the cursor to the position stored by the Save Cursor 
+         * Returns the cursor to the position stored by the Save Cursor
          * Position sequence.
          */
         static void restore_pos(std::ostream & stream = std::cout)
@@ -81,13 +81,13 @@ namespace ansi_cui
             stream << CSI << 'u';
         }
 
-        
+
     }
 
     namespace screen
     {
         /**
-         * Clears the screen and moves the cursor to the home position 
+         * Clears the screen and moves the cursor to the home position
          * (line 0, column 0).
          */
         static void clear(std::ostream & stream = std::cout)
@@ -204,9 +204,9 @@ namespace ansi_cui
         }
 
         /**
-         *  Changes the screen width or type to the mode specified by one of 
+         *  Changes the screen width or type to the mode specified by one of
          *  the following values:
-         *  
+         *
          *  0	40 x 25 monochrome (text)
          *  1	40 x 25 color (text)
          *  2	80 x 25 monochrome (text)
@@ -229,7 +229,7 @@ namespace ansi_cui
         }
 
         /**
-        *  Resets the mode by using the same values that Set Mode uses, 
+        *  Resets the mode by using the same values that Set Mode uses,
         *  except for 7, which disables line wrapping
         *
         *  0	40 x 25 monochrome (text)

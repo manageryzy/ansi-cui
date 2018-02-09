@@ -49,6 +49,7 @@ script:
   - cd build
   - export CC=gcc-$CC_VER
   - export CXX=g++-$CC_VER
+  - $CXX --version
   - cmake ..
   - make
   - main < echo "hello\n"
